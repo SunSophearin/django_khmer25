@@ -67,8 +67,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    "rest_framework_simplejwt",
     'products',
-
+    "users",
     "djoser",
 
 ]
@@ -160,7 +161,16 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ),
 }
 DJOSER = {
-    "USER_CREATE_PASSWORD_RETYPE": True,   # require password2
+  "SERIALIZERS": {
+    "user": "users.serializers.CustomUserSerializer",
+    "current_user": "users.serializers.CustomUserSerializer",
+  }
 }
